@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "arancia-marketing",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-l", "8766", "/Users/usuario/Documents/ARANCIA_MARKETING"],
+      "port": 8766
+    }
+  ]
+}
