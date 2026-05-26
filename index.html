@@ -1193,10 +1193,6 @@ footer {
     line-height: 1.55;
   }
 
-  .metodo-photo-overlay { left: 1rem; bottom: 1rem; padding: 0.85rem 1.1rem; max-width: 80vw; }
-  .metodo-overlay-quote { font-size: clamp(1rem, 4.5vw, 1.25rem); }
-  .metodo-overlay-label { font-size: 0.52rem; margin-bottom: 0.4rem; }
-
   /* ── SERVICIOS ── */
   .services-header {
     flex-direction: column;
@@ -1364,92 +1360,6 @@ footer {
   display: block;
 }
 
-/* Método photo strip */
-.metodo-photo-strip {
-  margin-top: 3.5rem;
-  position: relative;
-  overflow: hidden;
-  height: 420px;
-  border-top: 1px solid var(--border);
-}
-.metodo-photo-strip img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-  display: block;
-}
-/* Gradiente izquierda: cálido suave para fusionar con fondo blanco */
-.metodo-photo-strip::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(255,255,255,0.18) 0%,
-    rgba(255,255,255,0.04) 30%,
-    rgba(255,255,255,0)    60%
-  );
-  z-index: 2;
-  pointer-events: none;
-}
-/* Gradiente inferior muy sutil */
-.metodo-photo-strip::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(14,14,14,0.12) 0%, transparent 28%);
-  z-index: 2;
-  pointer-events: none;
-}
-/* Badge de texto sobre la foto — fondo oscuro semitransparente */
-.metodo-photo-overlay {
-  position: absolute;
-  left: 2.5rem;
-  bottom: 2rem;
-  z-index: 3;
-  background: rgba(14,14,14,0.62);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.10);
-  padding: 1.1rem 1.5rem;
-  max-width: 340px;
-}
-.metodo-overlay-label {
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--terra);
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 0.55rem;
-}
-.metodo-overlay-label::before {
-  content: '';
-  display: block;
-  width: 1.25rem;
-  height: 1.5px;
-  background: var(--terra);
-  flex-shrink: 0;
-}
-.metodo-overlay-quote {
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  color: var(--white);
-  margin-bottom: 0;
-}
-.metodo-overlay-quote .italic {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 1em;
-  color: var(--terra);
-  letter-spacing: 0;
-}
-.metodo-overlay-rule { display: none; }
-
 /* Servicios photo block */
 .services-photo-block {
   display: grid;
@@ -1508,8 +1418,6 @@ footer {
   .services-photo-block .quote-side { padding: 2rem 1.5rem; }
   .bio-photo-wrap img { min-height: 240px; }
   .photo-placeholder { min-height: 140px; }
-  /* Override cascade: este bloque viene después de .metodo-photo-strip base */
-  .metodo-photo-strip { height: 240px; margin-top: 1.5rem; }
 }
 
 </style>
@@ -1705,17 +1613,6 @@ footer {
     </div>
   </div>
 
-  <div class="metodo-photo-strip">
-    <img src="img/imagen8.png" alt="Estefanía Álvarez González — Branding Alquímico">
-    <div class="metodo-photo-overlay">
-      <div class="metodo-overlay-label">Branding Alquímico</div>
-      <p class="metodo-overlay-quote">
-        Tu historia<br>convertida en
-        <span class="italic">oro.</span>
-      </p>
-      <div class="metodo-overlay-rule"></div>
-    </div>
-  </div>
 </section>
 
 <!-- ============ SERVICIOS ============ -->
