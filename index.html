@@ -1192,9 +1192,9 @@ footer {
     line-height: 1.55;
   }
 
-  .metodo-photo-overlay { padding: 1.5rem 1.5rem; max-width: 100%; }
-  .metodo-overlay-quote { font-size: clamp(1.2rem, 5vw, 1.5rem); margin-bottom: 0.6rem; }
-  .metodo-overlay-label { font-size: 0.55rem; margin-bottom: 0.6rem; }
+  .metodo-photo-overlay { left: 1rem; bottom: 1rem; padding: 0.85rem 1.1rem; max-width: 80vw; }
+  .metodo-overlay-quote { font-size: clamp(1rem, 4.5vw, 1.25rem); }
+  .metodo-overlay-label { font-size: 0.52rem; margin-bottom: 0.4rem; }
 
   /* ── SERVICIOS ── */
   .services-header {
@@ -1378,80 +1378,76 @@ footer {
   object-position: center 20%;
   display: block;
 }
-/* Gradiente editorial: oscuro izquierda → transparente derecha */
+/* Gradiente izquierda: cálido suave para fusionar con fondo blanco */
 .metodo-photo-strip::before {
   content: '';
   position: absolute; inset: 0;
   background: linear-gradient(
-    108deg,
-    rgba(14,14,14,0.80) 0%,
-    rgba(14,14,14,0.50) 35%,
-    rgba(14,14,14,0.08) 62%,
-    rgba(14,14,14,0.00) 100%
+    to right,
+    rgba(255,255,255,0.18) 0%,
+    rgba(255,255,255,0.04) 30%,
+    rgba(255,255,255,0)    60%
   );
   z-index: 2;
   pointer-events: none;
 }
-/* Gradiente sutil inferior */
+/* Gradiente inferior muy sutil */
 .metodo-photo-strip::after {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(14,14,14,0.28) 0%, transparent 38%);
+  background: linear-gradient(to top, rgba(14,14,14,0.12) 0%, transparent 28%);
   z-index: 2;
   pointer-events: none;
 }
-/* Overlay de texto sobre la foto */
+/* Badge de texto sobre la foto — fondo oscuro semitransparente */
 .metodo-photo-overlay {
   position: absolute;
-  left: 0; top: 0; bottom: 0;
+  left: 2.5rem;
+  bottom: 2rem;
   z-index: 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 2.75rem 3.5rem;
-  max-width: 480px;
+  background: rgba(14,14,14,0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.10);
+  padding: 1.1rem 1.5rem;
+  max-width: 340px;
 }
 .metodo-overlay-label {
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--terra);
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  margin-bottom: 0.9rem;
+  gap: 0.6rem;
+  margin-bottom: 0.55rem;
 }
 .metodo-overlay-label::before {
   content: '';
   display: block;
-  width: 1.5rem;
+  width: 1.25rem;
   height: 1.5px;
   background: var(--terra);
   flex-shrink: 0;
 }
 .metodo-overlay-quote {
-  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
   font-weight: 900;
   letter-spacing: -0.02em;
-  line-height: 1.08;
+  line-height: 1.1;
   color: var(--white);
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 .metodo-overlay-quote .italic {
-  display: block;
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-weight: 400;
-  font-size: 0.92em;
+  font-size: 1em;
   color: var(--terra);
   letter-spacing: 0;
 }
-.metodo-overlay-rule {
-  width: 2rem;
-  height: 1.5px;
-  background: rgba(255,255,255,0.25);
-}
+.metodo-overlay-rule { display: none; }
 
 /* Servicios photo block */
 .services-photo-block {
