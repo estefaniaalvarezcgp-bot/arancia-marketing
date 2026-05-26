@@ -1192,7 +1192,9 @@ footer {
     line-height: 1.55;
   }
 
-  .metodo-photo-strip { height: 140px; margin-top: 1.75rem; }
+  .metodo-photo-overlay { padding: 1.5rem 1.5rem; max-width: 100%; }
+  .metodo-overlay-quote { font-size: clamp(1.2rem, 5vw, 1.5rem); margin-bottom: 0.6rem; }
+  .metodo-overlay-label { font-size: 0.55rem; margin-bottom: 0.6rem; }
 
   /* ── SERVICIOS ── */
   .services-header {
@@ -1366,18 +1368,89 @@ footer {
   margin-top: 3.5rem;
   position: relative;
   overflow: hidden;
-  height: 320px;
+  height: 420px;
   border-top: 1px solid var(--border);
 }
 .metodo-photo-strip img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 20%;
   display: block;
 }
-.metodo-photo-strip .photo-placeholder {
-  min-height: 320px;
+/* Gradiente editorial: oscuro izquierda → transparente derecha */
+.metodo-photo-strip::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    108deg,
+    rgba(14,14,14,0.80) 0%,
+    rgba(14,14,14,0.50) 35%,
+    rgba(14,14,14,0.08) 62%,
+    rgba(14,14,14,0.00) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+/* Gradiente sutil inferior */
+.metodo-photo-strip::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(14,14,14,0.28) 0%, transparent 38%);
+  z-index: 2;
+  pointer-events: none;
+}
+/* Overlay de texto sobre la foto */
+.metodo-photo-overlay {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.75rem 3.5rem;
+  max-width: 480px;
+}
+.metodo-overlay-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terra);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.9rem;
+}
+.metodo-overlay-label::before {
+  content: '';
+  display: block;
+  width: 1.5rem;
+  height: 1.5px;
+  background: var(--terra);
+  flex-shrink: 0;
+}
+.metodo-overlay-quote {
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.metodo-overlay-quote .italic {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.92em;
+  color: var(--terra);
+  letter-spacing: 0;
+}
+.metodo-overlay-rule {
+  width: 2rem;
+  height: 1.5px;
+  background: rgba(255,255,255,0.25);
 }
 
 /* Servicios photo block */
@@ -1438,8 +1511,8 @@ footer {
   .services-photo-block .quote-side { padding: 2rem 1.5rem; }
   .bio-photo-wrap img { min-height: 240px; }
   .photo-placeholder { min-height: 140px; }
-  .metodo-photo-strip { height: 140px; }
-  .metodo-photo-strip .photo-placeholder { min-height: 140px; }
+  /* Override cascade: este bloque viene después de .metodo-photo-strip base */
+  .metodo-photo-strip { height: 240px; margin-top: 1.5rem; }
 }
 
 </style>
@@ -1636,15 +1709,14 @@ footer {
   </div>
 
   <div class="metodo-photo-strip">
-    <!--
-      FOTO 2 — Sección "El Método"
-      Cuando tengas la imagen lista, elimina el div.photo-placeholder
-      y pega en su lugar:
-      <img src="foto-metodo.jpg" alt="Estefanía trabajando">
-    -->
-    <div class="photo-placeholder">
-      <span>Foto 2</span>
-      <p>El Método</p>
+    <img src="img/imagen8.png" alt="Estefanía Álvarez González — Branding Alquímico">
+    <div class="metodo-photo-overlay">
+      <div class="metodo-overlay-label">Branding Alquímico</div>
+      <p class="metodo-overlay-quote">
+        Tu historia<br>convertida en
+        <span class="italic">oro.</span>
+      </p>
+      <div class="metodo-overlay-rule"></div>
     </div>
   </div>
 </section>
