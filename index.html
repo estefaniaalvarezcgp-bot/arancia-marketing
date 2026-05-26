@@ -294,53 +294,133 @@ nav {
 }
 .btn-ghost:hover { color: var(--black); border-color: var(--black); }
 
+/* ---- Hero Photo Side ---- */
 .hero-photo {
   position: relative;
   grid-column: 2;
   overflow: hidden;
   background: var(--beige);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
 }
-.hero-photo-placeholder {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gray-light);
-  text-align: center;
-  line-height: 2;
+
+/* Gradiente de fusión izquierda */
+.hero-photo::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, var(--warm-white) 0%, rgba(250,248,245,0.3) 22%, rgba(250,248,245,0.0) 50%);
+  z-index: 2;
+  pointer-events: none;
 }
+/* Gradiente sutil inferior */
+.hero-photo::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(242,237,230,0.55) 0%, transparent 40%);
+  z-index: 2;
+  pointer-events: none;
+}
+
 .hero-photo img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
-}
-.hero-photo::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(to right, var(--warm-white) 0%, rgba(250,248,245,0.45) 28%, rgba(250,248,245,0.0) 55%);
-  z-index: 1;
-}
-.hero-photo::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(250,248,245,0.6) 0%, transparent 35%);
-  z-index: 1;
+  display: block;
 }
 
+/* --- Elemento decorativo: círculo giratorio --- */
+.hero-spin-ring {
+  position: absolute;
+  top: 2.5rem;
+  right: 2.5rem;
+  width: 110px;
+  height: 110px;
+  z-index: 10;
+  animation: spinRing 18s linear infinite;
+}
+.hero-spin-ring svg {
+  width: 100%;
+  height: 100%;
+}
+@keyframes spinRing {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* --- Elemento decorativo: línea vertical con ícono --- */
+.hero-deco-vbar {
+  position: absolute;
+  top: 50%;
+  left: 1.75rem;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+.hero-deco-vbar span {
+  writing-mode: vertical-rl;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gray-light);
+}
+.hero-deco-vbar::before,
+.hero-deco-vbar::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 3rem;
+  background: var(--border);
+}
+
+/* --- Elemento decorativo: chip "Marca personal" --- */
+.hero-chip {
+  position: absolute;
+  top: 2.8rem;
+  left: 3.5rem;
+  z-index: 10;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  padding: 0.55rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 24px rgba(14,14,14,0.06);
+}
+.hero-chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--terra);
+  flex-shrink: 0;
+}
+.hero-chip-text {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+/* --- Badge inferior (nombre) --- */
 .hero-badge {
   position: absolute;
   bottom: 2.5rem;
-  right: 2.5rem;
-  z-index: 20;
-  text-align: right;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(8px);
+  right: 2rem;
+  z-index: 10;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(10px);
   border: 1px solid var(--border);
   padding: 0.9rem 1.25rem;
+  box-shadow: 0 4px 24px rgba(14,14,14,0.08);
 }
 .hero-badge-name {
   font-size: 0.7rem;
@@ -356,6 +436,33 @@ nav {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--terra);
+}
+
+/* --- Elemento: marca de agua geométrica detrás de la foto --- */
+.hero-geo {
+  position: absolute;
+  bottom: -2rem;
+  right: -2rem;
+  width: 260px;
+  height: 260px;
+  border: 1.5px solid var(--beige-mid);
+  border-radius: 50%;
+  z-index: 0;
+  opacity: 0.6;
+}
+.hero-geo::before {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+}
+.hero-geo::after {
+  content: '';
+  position: absolute;
+  inset: 40px;
+  border: 1px solid rgba(166,95,66,0.15);
+  border-radius: 50%;
 }
 
 /* ============================================
@@ -912,7 +1019,7 @@ footer {
   .hero { grid-template-columns: 1fr; min-height: auto; }
   .hero-photo {
     grid-column: 1; grid-row: 1;
-    height: 65vw; min-height: 300px;
+    height: 75vw; min-height: 320px;
   }
   .hero-photo::before {
     background: linear-gradient(to bottom, rgba(250,248,245,0.1) 0%, rgba(250,248,245,0.5) 100%);
@@ -922,6 +1029,11 @@ footer {
     padding: 3rem 1.5rem 4rem;
   }
   .hero-vline { display: none; }
+  .hero-deco-vbar { display: none; }
+  .hero-spin-ring { width: 80px; height: 80px; top: 1rem; right: 1rem; }
+  .hero-chip { top: 1rem; left: 1rem; }
+  .hero-badge { bottom: 1rem; right: 1rem; }
+  .hero-geo { width: 180px; height: 180px; }
 
   .stats-bar { grid-template-columns: 1fr 1fr; }
   .stat:nth-child(2) { border-right: none; }
@@ -1137,14 +1249,42 @@ footer {
   </div>
 
   <div class="hero-photo">
-    <!-- INSTRUCCIÓN: Pega aquí tu etiqueta <img src="TU-FOTO.jpg"> cuando tengas la imagen lista -->
-    <div class="hero-photo-placeholder">
-      ↑<br>Tu foto<br>aquí
+
+    <!-- Imagen principal -->
+    <img src="img/hero.png" alt="Estefanía Álvarez González — Estratega de Marca">
+
+    <!-- Geo decorativo (círculos concéntricos fondo) -->
+    <div class="hero-geo"></div>
+
+    <!-- Chip superior izquierdo -->
+    <div class="hero-chip">
+      <div class="hero-chip-dot"></div>
+      <div class="hero-chip-text">Branding Alquímico</div>
     </div>
+
+    <!-- Anillo giratorio superior derecho -->
+    <div class="hero-spin-ring">
+      <svg viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path id="spinPath" d="M 55,55 m -42,0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0" fill="none"/>
+        <text font-family="Montserrat, sans-serif" font-size="9.5" font-weight="700" letter-spacing="3.5" fill="#A65F42" text-transform="uppercase">
+          <textPath href="#spinPath">MARCA · ESENCIA · ESTRATEGIA · </textPath>
+        </text>
+        <!-- Ícono central -->
+        <text x="55" y="60" text-anchor="middle" font-size="18" fill="#A65F42" opacity="0.7">✦</text>
+      </svg>
+    </div>
+
+    <!-- Barra vertical lateral -->
+    <div class="hero-deco-vbar">
+      <span>Medellín · Colombia</span>
+    </div>
+
+    <!-- Badge nombre -->
     <div class="hero-badge">
       <div class="hero-badge-name">Estefanía Álvarez González</div>
       <div class="hero-badge-role">Estratega de Marca · Branding Alquímico</div>
     </div>
+
   </div>
 </section>
 
