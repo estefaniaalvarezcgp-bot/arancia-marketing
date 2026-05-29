@@ -988,21 +988,21 @@ footer {
    ANIMATIONS
    ============================================ */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(22px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
 }
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-.hero-tag        { animation: fadeUp 0.7s ease both; }
-.hero-h1         { animation: fadeUp 0.7s 0.1s ease both; }
-.hero-divider    { animation: fadeUp 0.5s 0.2s ease both; }
-.hero-sub        { animation: fadeUp 0.7s 0.22s ease both; }
-.hero-btns       { animation: fadeUp 0.7s 0.3s ease both; }
-.hero-photo      { animation: fadeIn 0.9s 0.1s ease both; }
-.hero-badge      { animation: fadeUp 0.6s 0.5s ease both; }
-.stats-bar       { animation: fadeUp 0.6s 0.4s ease both; }
+.hero-tag        { animation: fadeUp 0.75s cubic-bezier(0.32,0.72,0,1) both; }
+.hero-h1         { animation: fadeUp 0.75s 0.1s  cubic-bezier(0.32,0.72,0,1) both; }
+.hero-divider    { animation: fadeUp 0.55s 0.2s  cubic-bezier(0.32,0.72,0,1) both; }
+.hero-sub        { animation: fadeUp 0.75s 0.22s cubic-bezier(0.32,0.72,0,1) both; }
+.hero-btns       { animation: fadeUp 0.75s 0.32s cubic-bezier(0.32,0.72,0,1) both; }
+.hero-photo      { animation: fadeIn 1s    0.1s  cubic-bezier(0.32,0.72,0,1) both; }
+.hero-badge      { animation: fadeUp 0.65s 0.5s  cubic-bezier(0.32,0.72,0,1) both; }
+.stats-bar       { animation: fadeUp 0.65s 0.4s  cubic-bezier(0.32,0.72,0,1) both; }
 
 /* ============================================
    RESPONSIVE — TABLET (≤1024px)
@@ -1420,6 +1420,142 @@ footer {
   .photo-placeholder { min-height: 140px; }
 }
 
+/* ============================================
+   DESIGN UPGRADES — Taste Skill
+   ============================================ */
+
+/* Tokens premium */
+:root {
+  --ease-premium:   cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+  --shadow-warm:    0 8px 28px rgba(166, 95, 66, 0.20);
+  --shadow-warm-sm: 0 4px 14px rgba(166, 95, 66, 0.13);
+}
+
+/* Grain / film texture */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Focus ring (accesibilidad) */
+:focus-visible {
+  outline: 2px solid var(--terra);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Text wrap balance en titulares */
+.hero-h1, .section-h2, .cta-h, .manifesto-big, .bio-name {
+  text-wrap: balance;
+}
+
+/* Botones — lift + press + easing premium */
+.btn-dark {
+  transition: background 0.3s var(--ease-premium),
+              transform  0.2s var(--ease-premium),
+              box-shadow 0.3s;
+}
+.btn-dark:hover  { transform: translateY(-2px); box-shadow: var(--shadow-warm); }
+.btn-dark:active { transform: translateY(0) scale(0.98); box-shadow: none; }
+
+.btn-white {
+  transition: background 0.3s var(--ease-premium),
+              transform  0.2s var(--ease-premium),
+              box-shadow 0.3s;
+}
+.btn-white:hover  { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,255,255,0.22); }
+.btn-white:active { transform: translateY(0) scale(0.98); }
+
+.btn-white-outline {
+  transition: border-color 0.3s var(--ease-premium),
+              background  0.25s,
+              transform   0.2s var(--ease-premium);
+}
+.btn-white-outline:hover  { background: rgba(255,255,255,0.09); transform: translateY(-2px); }
+.btn-white-outline:active { transform: translateY(0) scale(0.98); }
+
+.btn-ghost {
+  transition: color 0.25s var(--ease-premium), border-color 0.25s var(--ease-premium);
+}
+
+.nav-cta {
+  transition: background 0.3s var(--ease-premium), transform 0.2s var(--ease-premium);
+}
+.nav-cta:hover  { transform: translateY(-1px); }
+.nav-cta:active { transform: scale(0.97); }
+
+/* Nav — underline slide-in en links + blur al hacer scroll */
+.nav-links a:not(.nav-cta) { position: relative; }
+.nav-links a:not(.nav-cta)::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--terra);
+  transition: width 0.35s var(--ease-premium);
+}
+.nav-links a:not(.nav-cta):hover::after { width: 100%; }
+
+nav { transition: background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s; }
+nav.nav-scrolled {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 2px 24px rgba(166, 95, 66, 0.07);
+}
+
+/* Concept cards hover */
+.concept { transition: background 0.25s var(--ease-premium); }
+.concept:hover { background: rgba(166, 95, 66, 0.045); }
+.concept-name { transition: color 0.25s; }
+.concept:hover .concept-name { color: var(--terra); }
+
+/* Process steps hover */
+.p-step { transition: background 0.3s var(--ease-premium); }
+.p-step:hover { background: rgba(166, 95, 66, 0.07); }
+.p-step-num { transition: color 0.3s; }
+.p-step:hover .p-step-num { color: rgba(166, 95, 66, 0.4); }
+.p-step-name { transition: color 0.3s; }
+.p-step:hover .p-step-name { color: var(--terra-light); }
+
+/* Forwhom list — slide suave en hover */
+.fw-list.yes li {
+  transition: padding-left 0.28s var(--ease-premium), color 0.2s;
+}
+.fw-list.yes li:hover { padding-left: 0.45rem; color: var(--black); }
+
+/* Manifesto phrases hover */
+.phrase { transition: background 0.25s var(--ease-premium); }
+.phrase:hover { background: var(--warm-white); }
+
+/* Photo zoom suave en hover */
+.bio-photo-wrap img {
+  transition: transform 0.75s var(--ease-premium);
+}
+.bio-photo-wrap:hover img { transform: scale(1.04); }
+
+.services-photo-block .photo-side img {
+  transition: transform 0.75s var(--ease-premium);
+}
+.services-photo-block .photo-side:hover img { transform: scale(1.04); }
+
+/* CTA — gradiente cálido profundo */
+.cta-section {
+  background: linear-gradient(135deg, #A65F42 0%, #8C5038 55%, #7A4228 100%);
+}
+
+/* Footer — borde más cálido */
+footer { border-top-color: var(--beige-mid); }
+
+/* Números con figuras tabulares */
+.stat-num { font-variant-numeric: tabular-nums; }
+
 </style>
 </head>
 <body>
@@ -1816,5 +1952,14 @@ footer {
   <div class="footer-right">Medellín, Colombia · © 2025 · Todos los derechos reservados</div>
 </footer>
 
+<script>
+  /* Nav scroll blur */
+  (function(){
+    var nav = document.querySelector('nav');
+    function onScroll(){ nav.classList.toggle('nav-scrolled', window.scrollY > 24); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
 </body>
 </html>
